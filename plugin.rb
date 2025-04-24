@@ -1,17 +1,17 @@
 # frozen_string_literal: true
 
-# name: discourse-plugin-name
+# name: discourse-plugin-youtube-topic
 # about: TODO
 # meta_topic_id: TODO
 # version: 0.0.1
-# authors: Discourse
-# url: TODO
+# authors: archmagece
+# url: https://github.com/ScriptonBasestar/sb-discourse-youtube-topic
 # required_version: 2.7.0
 
 enabled_site_setting :plugin_name_enabled
 
 module ::MyPluginModule
-  PLUGIN_NAME = "discourse-plugin-name"
+  PLUGIN_NAME = "discourse-plugin-youtube-topic"
 end
 
 require_relative "lib/my_plugin_module/engine"
