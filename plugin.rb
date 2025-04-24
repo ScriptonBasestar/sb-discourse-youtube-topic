@@ -8,7 +8,7 @@
 # url: https://github.com/ScriptonBasestar/sb-discourse-youtube-topic
 # required_version: 2.7.0
 
-enabled_site_setting :plugin_name_enabled
+enabled_site_setting :youtube_topic_enabled
 
 module ::MyPluginModule
   PLUGIN_NAME = "discourse-plugin-youtube-topic"
@@ -17,5 +17,12 @@ end
 require_relative "lib/my_plugin_module/engine"
 
 after_initialize do
-  # Code which should run after Rails has finished booting
+  # Hook into topic creation
+  DiscourseEvent.on(:topic_created) do |topic, opts, user|
+    urls = opts.dig(:extra, :youtubeUrls)
+    if SiteSetting.youtube_topic_enabled && urls.present?
+      topic.custom_fields["youtube_video_urls"] = urls
+      topic.save_custom_fields
+    end
+  end
 end
